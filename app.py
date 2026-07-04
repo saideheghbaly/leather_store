@@ -100,8 +100,8 @@ class OrderAdmin(ModelView):
         'customer_address': 'آدرس تحویل'
     }
 
-
-admin = Admin(app, name='پنل مدیریت چرم شیک', template_mode='bootstrap3')
+# اصلاح انجام شد: پارامتر template_mode حذف شد
+admin = Admin(app, name='پنل مدیریت چرم شیک')
 admin.add_view(ProductAdmin(Product, db.session))
 admin.add_view(OrderAdmin(Order, db.session))
 
