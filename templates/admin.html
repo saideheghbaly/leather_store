@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>پنل مدیریت</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body class="p-5">
+    <div class="container">
+        <h2 class="mb-4">افزودن محصول جدید</h2>
+        
+        <!-- این فرم باید دقیقاً به همین صورت باشد -->
+        <form action="/add_product" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="نام محصول" class="form-control mb-2" required>
+            </div>
+            <div class="form-group">
+                <input type="number" name="price" placeholder="قیمت (تومان)" class="form-control mb-2" required>
+            </div>
+            <div class="form-group">
+                <textarea name="description" placeholder="توضیحات محصول" class="form-control mb-2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>انتخاب عکس محصول:</label>
+                <input type="file" name="image" class="form-control mb-2" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">ثبت و ذخیره محصول</button>
+        </form>
+        
+        <hr>
+        <a href="/" class="btn btn-secondary">بازگشت به سایت</a>
+    </div>
+</body>
+</html>
+
+
+
+

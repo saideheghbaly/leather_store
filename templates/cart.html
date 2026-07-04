@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سبد خرید شما</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: Tahoma, Arial, sans-serif; }
+        .cart-card { margin-top: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card cart-card p-4">
+            <h2 class="mb-4 text-center">سبد خرید شما 🛒</h2>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% if products %}
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>تصویر</th>
+                                <th>نام محصول</th>
+                                <th>قیمت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td>
+                                    {% if product.image %}
+                                        <img src="{{ url_for('static', filename='images/' + product.image) }}" width="60" class="rounded" alt="">
+                                    {% else %}
+                                        <span class="text-muted">بدون عکس</span>
+                                    {% endif %}
+                                </td>
+                                <td><strong>{{ product.name }}</strong></td>
+                                <td>{{ "{:,}".format(product.price) }} تومان</td>
+                                <td>
+                                    <a href="{{ url_for('remove_from_cart', product_id=product.id) }}" class="btn btn-danger btn-sm">حذف</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 border-top pt-3">
+                    <h4>جمع کل: <span class="text-success">{{ "{:,}".format(total_price) }} تومان</span></h4>
+                    <div>
+                        <a href="{{ url_for('index') }}" class="btn btn-outline-secondary me-2">ادامه خرید</a>
+                        <a href="{{ url_for('place_order') }}" class="btn btn-success">ثبت نهایی سفارش</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <p class="fs-5 text-muted">سبد خرید شما خالی است.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">بازگشت به فروشگاه</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+    
+

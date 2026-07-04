@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت اطلاعات ارسال</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: Tahoma, sans-serif; }
+        .order-card { margin-top: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container col-md-6">
+        <div class="card order-card p-4">
+            <h3 class="mb-4 text-center">مشخصات تحویل‌گیرنده 🚚</h3>
+            
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">نام و نام خانوادگی:</label>
+                    <input type="text" name="customer_name" class="form-control" placeholder="نام خود را وارد کنید" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">آدرس کامل پستی:</label>
+                    <textarea name="customer_address" class="form-control" rows="3" placeholder="آدرس دقیق جهت ارسال" required></textarea>
+                </div>
+
+                <div class="list-group mb-4">
+                    <h6 class="mb-2">لیست محصولات سفارش:</h6>
+                    {% for product in products %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ product.name }}</span>
+                            <span class="badge bg-primary rounded-pill">{{ "{:,}".format(product.price) }} تومان</span>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg">تایید و پرداخت نهایی</button>
+                    <a href="{{ url_for('view_cart') }}" class="btn btn-outline-secondary">بازگشت به سبد خرید</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+        
+
+    
+
